@@ -1,0 +1,162 @@
+Client, Supplier, Admin, ו־Auth.
+
+כל בקשה כוללת:
+
+כתובת URL
+
+Method
+
+Headers
+
+Body (JSON מלא)
+
+הסבר קצר
+
+כך תוכל לבדוק ב־Postman שה־backend פועל תקין.
+
+🟦 1) AUTH — כניסה (Login)
+POST /api/auth/login
+URL:
+http://localhost:5000/api/auth/login
+
+Headers:
+Content-Type: application/json
+
+Body (Example - Client):
+{
+  "email": "client@mock.com",
+  "password": "123456"
+}
+
+Body (Supplier):
+{
+  "email": "supplier@mock.com",
+  "password": "123456"
+}
+
+Body (Admin):
+{
+  "email": "admin@mock.com",
+  "password": "123456"
+}
+
+🟩 2) CLIENT API
+
+הלקוח יוצר בקשות נסיעה וצופה בנסיעות שלו.
+
+POST /api/client/ride
+
+⮕ יצירת בקשת נסיעה חדשה
+
+URL:
+http://localhost:5000/api/client/ride
+
+Headers:
+Content-Type: application/json
+Authorization: Bearer <TOKEN מה-login>
+
+Body (Example):
+{
+  "tripType": "חד פעמית",
+  "origin": "תל אביב",
+  "destinations": ["חיפה", "עפולה"],
+  "vehicleType": "אוטובוס",
+  "seats": 50
+}
+
+GET /api/client/ride
+
+⮕ קבלת כל הנסיעות של הלקוח
+
+URL:
+http://localhost:5000/api/client/ride
+
+Headers:
+Authorization: Bearer <TOKEN של Client>
+
+
+Body — לא צריך.
+
+🟧 3) SUPPLIER API
+
+הספק רואה בקשות ומגיש הצעות.
+
+GET /api/supplier/requests
+
+⮕ הצגת בקשות נסיעה שמצבם Pending (ממתינות להצעות)
+
+URL:
+http://localhost:5000/api/supplier/requests
+
+Headers:
+Authorization: Bearer <TOKEN של Supplier>
+
+POST /api/supplier/quote
+
+⮕ הגשת הצעת מחיר עבור נסיעה מסוימת
+
+URL:
+http://localhost:5000/api/supplier/quote
+
+Headers:
+Content-Type: application/json
+Authorization: Bearer <TOKEN של Supplier>
+
+Body:
+{
+  "rideRequestId": "<ID של הנסיעה>",
+  "price": 1200
+}
+
+GET /api/supplier/quotes
+
+⮕ קבלת כל ההצעות שהספק הגיש + סטטוס אם אושרו
+
+URL:
+http://localhost:5000/api/supplier/quotes
+
+Headers:
+Authorization: Bearer <TOKEN של Supplier>
+
+🟦 4) ADMIN API
+
+המנהל רואה את כל ההצעות ומאשר עסקאות.
+
+GET /api/admin/deals
+
+⮕ קבלת כל ההצעות שעדיין לא אושרו (approved = false)
+
+URL:
+http://localhost:5000/api/admin/deals
+
+Headers:
+Authorization: Bearer <TOKEN של Admin>
+
+POST /api/admin/approve
+
+⮕ אישור עסקה (הצעת מחיר)
+
+URL:
+http://localhost:5000/api/admin/approve
+
+Headers:
+Content-Type: application/json
+Authorization: Bearer <TOKEN של Admin>
+
+Body:
+{
+  "quoteId": "<ID של ההצעה>"
+}
+
+🟩 סיכום קצר של הזרימה ב-Postman
+משתמש	פעולה	בקשה
+Client	Login	POST /auth/login
+Client	יצירת נסיעה	POST /client/ride
+Client	צפייה בנסיעות	GET /client/ride
+Supplier	Login	POST /auth/login
+Supplier	בקשות זמינות	GET /supplier/requests
+Supplier	הגשת הצעה	POST /supplier/quote
+Supplier	הצעות שביצע	GET /supplier/quotes
+Admin	Login	POST /auth/login
+Admin	עסקאות פתוחות	GET /admin/deals
+Admin	אישור עסקה	POST /admin/approve

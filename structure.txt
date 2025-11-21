@@ -1,0 +1,30 @@
+transport-backend/
+│
+├── src/
+│   ├── server.ts
+│   ├── config/
+│   │     └── db.ts
+│   ├── models/
+│   │     ├── User.ts
+│   │     ├── RideRequest.ts
+│   │     ├── SupplierQuote.ts
+│   ├── routes/
+│   │     ├── auth.routes.ts
+│   │     ├── client.routes.ts
+│   │     ├── supplier.routes.ts
+│   │     ├── admin.routes.ts
+│   ├── middleware/
+│   │     └── authMiddleware.ts
+│   ├── controllers/
+│   │     ├── auth.controller.ts
+│   │     ├── client.controller.ts
+│   │     ├── supplier.controller.ts
+│   │     ├── admin.controller.ts
+│   ├── types/
+│   │     └── UserRole.ts
+│   └── utils/
+│         └── generateToken.ts
+│
+├── .env
+├── tsconfig.json
+└── package.json
