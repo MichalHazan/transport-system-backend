@@ -11,6 +11,8 @@ import supplierRoutes from "./routes/supplier.routes";
 import adminRoutes from "./routes/admin.routes";
 import userRoutes from "./routes/user.routes";
 import QuoteRoutes from "./routes/quote.routes";
+import { apiDocs } from "./docs/apiDocs";
+
 
 const app = express();
 app.use(cors());
@@ -19,6 +21,7 @@ app.use(express.json());
 connectDB();
 
 // ראוטים
+app.get("/api", apiDocs);
 app.use("/api/auth", authRoutes);
 app.use("/api/client", clientRoutes);
 app.use("/api/supplier", supplierRoutes);
