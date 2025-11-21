@@ -1,0 +1,12 @@
+# Node
+node_modules/
+npm-debug.log
+dist/
+.env
+
+# MacOS
+.DS_Store
+
+# Logs
+logs
+*.log
