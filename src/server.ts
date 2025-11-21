@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import { apiDocs } from "./docs/apiDocs";
 dotenv.config();
 
 import { connectDB } from "./config/db";
@@ -11,7 +12,7 @@ import supplierRoutes from "./routes/supplier.routes";
 import adminRoutes from "./routes/admin.routes";
 import userRoutes from "./routes/user.routes";
 import QuoteRoutes from "./routes/quote.routes";
-import { apiDocs } from "./docs/apiDocs";
+
 
 
 const app = express();
